@@ -19,7 +19,8 @@
   "dependencies": {
     "@elastic/elasticsearch": "7.15.0",
     "lodash": "4.17.21",
-    "mongoose": "6.0.13"
+    "mongoose": "6.0.13",
+    "rimraf": "^3.0.2"
   },
   "devDependencies": {
     "@types/jest": "27.0.2",
@@ -38,7 +39,7 @@
   "scripts": {
     "authors": "./scripts/update_authors.sh",
     "prepare": "npm run build",
-    "build": "rmdir dist /s /q && tsc -p . ",
+    "build": "rimraf dist && tsc -p . ",
     "lint-fix": "npm run lint -- --fix",
     "lint": "eslint lib test",
     "jest": "jest --detectOpenHandles --runInBand",
