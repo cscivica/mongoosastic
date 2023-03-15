@@ -19,20 +19,22 @@ export async function index(
   }
 
   const indexName = inOpts.index ? inOpts.index : getIndexName(this)
-  
+  // @ts-ignore
   if (this.schema.mappings === undefined || this.schema.mappings === null) {
     const generator = new Generator()
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const mapping = generator.generateMapping(this.schema)
-    
+    // @ts-ignore
     this.schema.mappings = mapping
   }
 
   let body
   if (options.customSerialize) {
+    // @ts-ignore
     body = options.customSerialize(this, this.schema.mappings)
   } else {
+    // @ts-ignore
     body = serialize(this, this.schema.mappings)
   }
 
