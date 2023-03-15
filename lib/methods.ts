@@ -19,17 +19,21 @@ export async function index(
   }
 
   const indexName = inOpts.index ? inOpts.index : getIndexName(this)
-
-  const generator = new Generator()
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const mapping = generator.generateMapping(this.schema)
+  
+  if (this.schema.mappings === undefined || this.schema.mappings === null) {
+    const generator = new Generator()
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const mapping = generator.generateMapping(this.schema)
+    
+    this.schema.mappings = mapping
+  }
 
   let body
   if (options.customSerialize) {
-    body = options.customSerialize(this, mapping)
+    body = options.customSerialize(this, this.schema.mappings)
   } else {
-    body = serialize(this, mapping)
+    body = serialize(this, this.schema.mappings)
   }
 
   if (options.transform) {
