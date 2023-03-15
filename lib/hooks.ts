@@ -20,10 +20,13 @@ export async function postSave(doc: MongoosasticDocument): Promise<void> {
   const populate = options && options.populate
   if (doc) {
     if (populate && populate.length) {
+      // @ts-ignore
       const popDoc = await doc.model(doc.collection.name)().init(doc.toObject()).populate(populate) 
       popDoc
         .index()
+      // @ts-ignore
         .then((res) => onIndex(null, res))
+      // @ts-ignore
         .catch((err) => onIndex(err, null))
     } else {
       doc
