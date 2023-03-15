@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import copy from 'fast-copy'
 import { cloneDeep } from 'lodash';
 import { Schema } from 'mongoose'
 import { MongoosasticDocument, MongoosasticModel } from './types'
@@ -147,7 +146,7 @@ function getCleanTree(tree: Record<string, any>, paths: Record<string, any>, inP
   let geoFound = false
   const prefix = inPrefix !== '' ? `${inPrefix}.` : inPrefix
 
-  tree = copy(tree)
+  tree = cloneDeep(tree)
   paths = cloneDeep(paths)
 
   for (field in tree) {
