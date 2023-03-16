@@ -320,9 +320,9 @@ function nestedSchema(
 export default class Generator {
   generateMapping(schema: Schema<MongoosasticDocument, MongoosasticModel<MongoosasticDocument>>): Record<string, any> {
     // @ts-ignore
-    if (this.schema.mappings !== undefined && this.schema.mappings.properties !== undefined) {
+    if (schema.mappings !== undefined && schema.mappings.properties !== undefined) {
       // @ts-ignore
-      return this.schema.mappings
+      return schema.mappings
     }
     
     const cleanTree = getCleanTree(schema['tree' as keyof Schema], schema.paths, '', true)
