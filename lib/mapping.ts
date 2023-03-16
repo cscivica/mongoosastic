@@ -319,12 +319,18 @@ function nestedSchema(
 
 export default class Generator {
   generateMapping(schema: Schema<MongoosasticDocument, MongoosasticModel<MongoosasticDocument>>): Record<string, any> {
+    // @ts-ignore
+    if (this.schema.mappings !== undefined && this.schema.mappings.properties !== undefined) {
+      // @ts-ignore
+      return this.schema.mappings
+    }
+    
     const cleanTree = getCleanTree(schema['tree' as keyof Schema], schema.paths, '', true)
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     delete cleanTree[schema.get('versionKey')]
-    const mapping = getMapping(cleanTree, '')
-    return { properties: mapping }
+    return { properties: getMapping(cleanTree, '') }
+ 
   }
 
   getCleanTree(schema: Schema<MongoosasticDocument, MongoosasticModel<MongoosasticDocument>>): Record<string, any> {
