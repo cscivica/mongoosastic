@@ -9,7 +9,7 @@ import { filterMappingFromMixed, getIndexName } from './utils'
 
 export async function createMapping(
   this: MongoosasticModel<MongoosasticDocument>,
-  body: IndicesCreateRequest['body']
+  body: IndicesCreateRequest['body'] | 'attachElasticSearch'
 ): Promise<Record<PropertyName, MappingProperty>> {
   const options = this.esOptions()
   const client = this.esClient()
@@ -28,6 +28,10 @@ export async function createMapping(
     Object.keys(properties).map((key) => {
       completeMapping.properties[key] = properties[key]
     })
+  }
+  
+  if (body === 'attachElasticSearch') {
+    return completeMapping
   }
 
   const exists = await client.indices.exists({
