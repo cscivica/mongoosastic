@@ -19,6 +19,7 @@ export async function createMapping(
   // @ts-ignore
   let completeMapping = {};
   
+  // @ts-ignore
   if (this.schema.mappings !== undefined || this.schema.mappings !== null) {
     // @ts-ignore
     completeMapping = this.schema.mappings
@@ -35,6 +36,7 @@ export async function createMapping(
   const properties = options.properties
   if (properties) {
     Object.keys(properties).map((key) => {
+      // @ts-ignore
       completeMapping.properties[key] = properties[key]
     })
   }
