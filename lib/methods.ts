@@ -35,13 +35,7 @@ export async function index(
     body = options.customSerialize(this, this.schema.mappings)
   } else {
     // @ts-ignore
-    if (this.schema.serializedMappings === undefined || this.schema.serializedMappings === null) {
-      // @ts-ignore
-      this.schema.serializedMappings = serialize(this, this.schema.mappings)
-    }
-    
-    // @ts-ignore
-    body = this.schema.serializedMappings;
+    body = serialize(this, this.schema.mappings)
   }
 
   if (options.transform) {
