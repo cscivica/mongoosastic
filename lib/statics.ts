@@ -20,14 +20,13 @@ export async function createMapping(
   let completeMapping = {};
   
   // @ts-ignore
-  if (this.schema.mappings !== undefined || this.schema.mappings !== null) {
-    // @ts-ignore
-    completeMapping = this.schema.mappings
-  } else {
+  if (this.schema.mappings === undefined || this.schema.mappings === null) {
     const generator = new Generator()
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     completeMapping = generator.generateMapping(this.schema)
+  } else {
+    completeMapping = this.schema.mappings;
   }
   
   // @ts-ignore
