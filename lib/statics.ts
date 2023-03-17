@@ -15,12 +15,21 @@ export async function createMapping(
   const client = this.esClient()
 
   const indexName = getIndexName(this)
-
-  const generator = new Generator()
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  
   // @ts-ignore
-  const completeMapping = generator.generateMapping(this.schema)
-
+  let completeMapping = {};
+  
+  if (this.schema.mappings !== undefined || this.schema.mappings !== null) {
+    // @ts-ignore
+    completeMapping = this.schema.mappings
+  } else {
+    const generator = new Generator()
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    completeMapping = generator.generateMapping(this.schema)
+  }
+  
+  // @ts-ignore
   completeMapping.properties = filterMappingFromMixed(completeMapping.properties)
 
   const properties = options.properties
