@@ -26,6 +26,7 @@ export async function createMapping(
     // @ts-ignore
     completeMapping = generator.generateMapping(this.schema)
   } else {
+    // @ts-ignore
     completeMapping = this.schema.mappings;
   }
   
