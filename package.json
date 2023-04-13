@@ -39,6 +39,7 @@
   },
   "scripts": {
     "authors": "./scripts/update_authors.sh",
+    "prepublish": "npm run build",
     "build": "rimraf dist && tsc -p . ",
     "lint-fix": "npm run lint -- --fix",
     "lint": "eslint lib test",
