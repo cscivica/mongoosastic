@@ -18,11 +18,9 @@
   "types": "index.d.ts",
   "dependencies": {
     "@elastic/elasticsearch": "7.15.0",
-    "fast-copy": "^3.0.1",
     "lodash": "4.17.21",
     "mongoose": "6.0.13",
-    "rimraf": "^3.0.2",
-    "typescript": "4.4.4"
+    "rimraf": "^3.0.2"
   },
   "devDependencies": {
     "@types/jest": "27.0.2",
@@ -35,12 +33,11 @@
     "jest": "26.6.3",
     "ts-jest": "26.5.6",
     "ts-node": "10.4.0",
-    "tslib": "2.3.1"
+    "tslib": "2.3.1",
+    "typescript": "4.4.4"
   },
   "scripts": {
     "authors": "./scripts/update_authors.sh",
-    "preinstall": "npm run build",
-    "build": "rimraf dist && tsc -p . ",
     "lint-fix": "npm run lint -- --fix",
     "lint": "eslint lib test",
     "jest": "jest --detectOpenHandles --runInBand",
